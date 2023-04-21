@@ -61,33 +61,32 @@ function App() {
       .then((data) => {
         if (data) {
           setIsInfoTolltipSuccess(true); // успешный вход
-          history.push("/sing-in"); // перебрасываем на вход
+          history.push("/sign-in"); // перебрасываем на вход
         }
       })
       .catch((err) => {
         setIsInfoTolltipSuccess(false); // fail
         console.log(err);
       })
-    .finally(() => setIsSuccessPopupOpen(true)); // в любом случае открываем попап
+      .finally(() => setIsSuccessPopupOpen(true)); // в любом случае открываем попап
   }
 
   function handleAuthUser(email, password) {
-    authApi
-        .loginUser(email, password)
-        .then((data) => {
-            if (data.token) {
-                setUserEmail(email);
-                setLoggedIn(true);
-                localStorage.setItem("jwt", data.token);
-                history.push("/");
-            }
-        })
-        .catch((err) => {
-          setIsInfoTolltipSuccess(false);
-            setIsSuccessPopupOpen(true);
-            console.log(err);
-        });
-}
+    authApi.loginUser(email, password)
+      .then((data) => {
+        if (data.token) {
+          setUserEmail(email);
+          setLoggedIn(true);
+          localStorage.setItem("jwt", data.token);
+          history.push("/");
+        }
+      })
+      .catch((err) => {
+        setIsInfoTolltipSuccess(false);
+        setIsSuccessPopupOpen(true);
+        console.log(err);
+      });
+  }
 
   function handleSingOut() {
     localStorage.removeItem("jwt");
@@ -165,36 +164,28 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <div className="page__container">
-        <Header userEmail={userEmail} onSignOut={handleSingOut}
-                    />
-                    <ProtectedRoute
-                        component={Main}
-                        onEditProfile={setIsEditProfilePopupOpen}
-                        onEditAvatar={setIsEditAvatarPopupOpen}
-                        onAddPlace={setIsAddPlacePopupOpen}
-                        onCardClick={setSelectedCard}
-                        onCardLike={handleCardLike}
-                        onCardDelete={handleCardDelete}
-                        cards={cards}
-                        path="/"
-                    />
-                    {loggedIn && <Footer/>}
-                    <Route path="/sign-up">
-                        <Register
-                            onRegister={handleRegisterUser}
-                        />
-                    </Route>
-                    <Route path="/sign-in">
-                        <Login
-                            onLogin={handleAuthUser}
-                        />
-                    </Route>
-                    <Route>
-                        {loggedIn
-                            ? <Redirect to="/"/>
-                            : <Redirect to="/sign-in"/>
-                        }
-                    </Route>
+          <Header userEmail={userEmail} onSignOut={handleSingOut} />
+          <ProtectedRoute
+            component={Main}
+            onEditProfile={setIsEditProfilePopupOpen}
+            onEditAvatar={setIsEditAvatarPopupOpen}
+            onAddPlace={setIsAddPlacePopupOpen}
+            onCardClick={setSelectedCard}
+            onCardLike={handleCardLike}
+            onCardDelete={handleCardDelete}
+            cards={cards}
+            path="/"
+          />
+              {loggedIn && <Footer />}
+          <Route path="/sign-up">
+            <Register onRegister={handleRegisterUser}/>
+          </Route>
+          <Route path="/sign-in">
+            <Login onLogin={handleAuthUser}/>
+          </Route>
+          <Route>
+            {loggedIn ? <Redirect to="/" /> : <Redirect to="/sign-in" />}
+          </Route>
           <AddPlacePopup
             onAddPlace={handleAddPlaceSubmit}
             isOpen={isAddPlacePopupOpen}
