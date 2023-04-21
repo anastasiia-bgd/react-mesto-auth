@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link} from "react-router-dom";
 
-function Register({ loggedIn, onRegister }) {
+function Register({ onRegister }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   // меняем инпут
@@ -18,9 +18,6 @@ function Register({ loggedIn, onRegister }) {
     onRegister(email, password);
   }
 
-  if (loggedIn) {
-    return <Redirect to ="/"/>;
-  }
 
   return (
     <form

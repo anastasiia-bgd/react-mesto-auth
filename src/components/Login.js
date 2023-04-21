@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
+
 
 function Login({ loggedIn, onLogin }) {
   const [email, setEmail] = useState("");
@@ -16,10 +16,6 @@ function Login({ loggedIn, onLogin }) {
   function handleSubmit(e) {
     e.preventDefault();
     onLogin(email, password);
-  }
-
-  if (loggedIn) {
-    return <Redirect to ="/"/>;
   }
 
   return (
