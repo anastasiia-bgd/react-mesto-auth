@@ -29,13 +29,13 @@ function App() {
   const [isSuccessPopupOpen, setIsSuccessPopupOpen] = useState(false);
   const [isInfoTolltipSuccess, setIsInfoTolltipSuccess] = useState(false);
   const isPopupOpen =
-  isEditProfilePopupOpen ||
-  isAddPlacePopupOpen ||
-  isEditAvatarPopupOpen ||
-  isInfoTolltipSuccess ||
-  selectedCard ||
-  isSuccessPopupOpen;
-  
+    isEditProfilePopupOpen ||
+    isAddPlacePopupOpen ||
+    isEditAvatarPopupOpen ||
+    isInfoTolltipSuccess ||
+    selectedCard ||
+    isSuccessPopupOpen;
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -48,23 +48,6 @@ function App() {
         .catch((err) => console.log(err));
     }
   }, [loggedIn]);
-
-  // useEffect(() => {
-  //   api.getUserInfo()
-  //     .then(profileInfo => setCurrentUser(profileInfo))
-  //     .catch(err => console.log(err))
-
-  //   api.getInitialCards().then(cardsData => {
-  //     setCards(cardsData.map((card) => ({
-  //       _id: card._id,
-  //       name: card.name,
-  //       link: card.link,
-  //       likes: card.likes,
-  //       owner: card.owner
-  //     })))
-  //   })
-  //     .catch(err => console.log(err))
-  // }, []);
 
   function closeAllPopups() {
     setIsEditProfilePopupOpen(false)
@@ -80,15 +63,15 @@ function App() {
       .then((data) => {
         console.log(data);
         if (data) {
-          setIsInfoTolltipSuccess(true); 
+          setIsInfoTolltipSuccess(true);
           navigate("/sign-in");
         }
       })
       .catch((err) => {
-        setIsInfoTolltipSuccess(false); 
+        setIsInfoTolltipSuccess(false);
         console.log(err);
       })
-      .finally(() => setIsSuccessPopupOpen(true)); 
+      .finally(() => setIsSuccessPopupOpen(true));
   }
 
   function handleAuthUser(email, password) {

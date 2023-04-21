@@ -46,7 +46,7 @@ function Login({ loggedIn, onLogin }) {
         Войти
       </button>
     </form>
-    
+
   );
 }
 export default Login;
