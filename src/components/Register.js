@@ -23,7 +23,6 @@ function Register({ onRegister }) {
     <form
       onSubmit={handleSubmit}
       className="auth__form"
-      noValidate
       name="register"
     >
       <h2 className="auth__title">Регистрация</h2>

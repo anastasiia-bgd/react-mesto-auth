@@ -1,28 +1,20 @@
+
 import React from "react";
-// import closeIcon from "../images/CloseIcon.svg";
-function InfoTooltip({ onClose, name, isOpen, isSuccess }) {
+
+function InfoTooltip({ isOpen, onClose, text, image, name }) {
   return (
-    <div className={`popup popup_${name} ${isOpen ? `popup_opened` : ""}`}>
+    <div className={`popup popup_type_${name} ${isOpen ? `popup_opened` : ""}`}>
       <div className="popup__container">
-        <div
-          className={`popup__success ${
-            isSuccess ? "popup__success_type_ok" : "popup__success_type_fail"
-          }`}
-        ></div>
-        <h2 className="popup__heading">
-          {isSuccess
-            ? "Вы успешно зарегистрировались!"
-            : "Что-то пошло не так! Попробуйте еще раз"}
-        </h2>
-        <button type="button" className="popup__close-button" onClick={onClose}>
-          {/* <img
-            src={closeIcon}
-            alt="закрывающий крестик"
-            className="popup__close-image"
-          /> */}
-        </button>
+        <button
+          type="button"
+          className="popup__close-button"
+          onClick={onClose}
+        />
+        <img className="popup__auth-image" src={image} alt="" />
+        <h2 className="popup__auth-title">{text}</h2>
       </div>
     </div>
   );
 }
+
 export default InfoTooltip;

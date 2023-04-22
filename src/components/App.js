@@ -15,6 +15,8 @@ import Login from './Login.js';
 import Register from './Register.js';
 import ProtectedRoute from './ProtectedRoute.js'
 import InfoTooltip from './InfoTooltip.js';
+import okIcon from '../images/okIcon.jpg'
+import failIcon from '../images/failIcon.jpg'
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -28,6 +30,7 @@ function App() {
   const [userEmail, setUserEmail] = useState('');
   const [isSuccessPopupOpen, setIsSuccessPopupOpen] = useState(false);
   const [isInfoTolltipSuccess, setIsInfoTolltipSuccess] = useState(false);
+
   const isPopupOpen =
     isEditProfilePopupOpen ||
     isAddPlacePopupOpen ||
@@ -74,13 +77,13 @@ function App() {
       .finally(() => setIsSuccessPopupOpen(true));
   }
 
-  function handleAuthUser(email, password) {
-    auth.loginUser(email, password)
+  function handleAuthUser(password, email) {
+    auth.loginUser(password, email)
       .then((data) => {
-        if (datanpm) {
+        if (data) {
           setUserEmail(email);
           setLoggedIn(true);
-          localStorage.setItem("jwt", data.token);
+          localStorage.setItem("jwt", data);
           navigate("/");
         }
       })
@@ -205,26 +208,7 @@ function App() {
             />
           </Routes>
           {loggedIn && <Footer />}
-          {/* <ProtectedRoute
-            component={Main}
-            onEditProfile={setIsEditProfilePopupOpen}
-            onEditAvatar={setIsEditAvatarPopupOpen}
-            onAddPlace={setIsAddPlacePopupOpen}
-            onCardClick={setSelectedCard}
-            onCardLike={handleCardLike}
-            onCardDelete={handleCardDelete}
-            cards={cards}
-            path="/"
-          />
-          <Route path="/sign-up">
-            <Register onRegister={handleRegisterUser}/>
-          </Route>
-          <Route path="/sign-in">
-            <Login onLogin={handleAuthUser}/>
-          </Route>
-          <Route>
-            {loggedIn ? <Redirect to="/" /> : <Redirect to="/sign-in" />}
-          </Route> */}
+         
           <AddPlacePopup
             onAddPlace={handleAddPlaceSubmit}
             isOpen={isAddPlacePopupOpen}
@@ -251,7 +235,8 @@ function App() {
             name={"success"}
             onClose={closeAllPopups}
             isOpen={isSuccessPopupOpen}
-            isSuccess={isInfoTolltipSuccess}
+            text ={isInfoTolltipSuccess ? 'Вы успешно зарегистрировались!' : 'Что-то пошло не так! Попробуйте ещё раз.'}
+            image={isInfoTolltipSuccess ? okIcon : failIcon}
           />
         </div>
       </div>
