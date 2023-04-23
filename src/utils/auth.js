@@ -3,25 +3,25 @@ export const BASE_URL = "https://auth.nomoreparties.co";
 
 const handleCheckResponse = response => response.ok ? response.json() : Promise.reject(`Ошибка ${response.status}`)
 
-export const registerUser = (password, email) => {
+export const registerUser = (email, password) => {
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({password, email})
+    body: JSON.stringify({email, password})
   })
   .then(handleCheckResponse)
 }; 
 
 
-export const loginUser = (password, email) => {
+export const loginUser = (email, password) => {
   return fetch(`${BASE_URL}/signin`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({password, email})
+    body: JSON.stringify({email, password})
   })
   .then(handleCheckResponse)
   .then((data) => {

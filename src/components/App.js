@@ -61,8 +61,8 @@ function App() {
     setIsSuccessPopupOpen(false)
   }
 
-  function handleRegisterUser(password, email) {
-    auth.registerUser(password, email)
+  function handleRegisterUser(email, password) {
+    auth.registerUser(email, password)
       .then((data) => {
         console.log(data);
         if (data) {
@@ -77,8 +77,8 @@ function App() {
       .finally(() => setIsSuccessPopupOpen(true));
   }
 
-  function handleAuthUser(password, email) {
-    auth.loginUser(password, email)
+  function handleAuthUser(email, password) {
+    auth.loginUser(email, password)
       .then((data) => {
         if (data) {
           setUserEmail(email);
