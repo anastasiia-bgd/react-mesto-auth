@@ -97,8 +97,8 @@ function App() {
   function handleSingOut() {
     localStorage.removeItem("jwt");
     setLoggedIn(false);
-    setUserEmail(""); // очищаем почту
-    navigate("/sign-in"); // перебрасываем на вход
+    setUserEmail("");
+    navigate("/sign-in"); 
   }
 
   useEffect(() => {
@@ -108,9 +108,8 @@ function App() {
         .then((data) => {
           if (data) {
             setLoggedIn(true);
-            navigate("/"); // войдено
-            setUserEmail(data.data.email); // получаем почту
-            // перебрасываем в профиль
+            navigate("/");
+            setUserEmail(data.data.email); 
           }
         })
         .catch((err) => console.log(err));
